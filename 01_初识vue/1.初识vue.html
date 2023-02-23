@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初识vue</title>
+    <!--引入本地的vue-->
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<!--准备容器-->
+<div id="demo">
+    <h1>Hello,{{name.toLowerCase()}},{{address}}</h1>
+</div>
+
+<!--创建vue实例-->
+<script type="text/javascript">
+    // vue全局配置，关闭生产提示
+    Vue.config.productionTip = false
+
+    // 创建vue实例
+    new Vue({
+        // el用于指定当前vue实例为哪个容器服务
+        el:'#demo',
+        data:{
+            // data用于存储数据，数据供el指定的容器使用
+            name:'EVE',
+            address:'冰岛'
+        }
+    })
+</script>
+</body>
+</html>
