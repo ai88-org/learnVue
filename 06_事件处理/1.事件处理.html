@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.事件处理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="demo">
+        <h1>欢迎来到EVE</h1>
+<!--        <button v-on:click="showInfo">点击我一下</button>-->
+        <!--简写形式-->
+        <button @click="showInfo1">点击我一下(不传参)</button>
+        <button @click="showInfo2($event,666)">点击我一下(传参)</button>
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        const vm = new Vue({
+            el:'#demo',
+            methods:{
+                showInfo1(event){
+                    console.log(this==vm)
+                    // console.log(event.target)
+                    // console.log(a,b,c,d)
+                    alert("欢迎来到EVE1")
+                },
+                showInfo2(event,number){
+                    //console.log(this==vm)
+                    // console.log(event.target)
+                    // console.log(a,b,c,d)
+                    alert(number)
+                    console.log("欢迎来到EVE2",number)
+                },
+            }
+
+        })
+    </script>
+
+</body>
+</html>
