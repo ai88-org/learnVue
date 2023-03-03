@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.事件修饰符</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        *{
+            margin-top: 20px;
+        }
+        .demo1{
+            height: 50px;
+            background-color: aqua;
+        }
+        .div1{
+            padding: 5px;
+            background-color: skyblue;
+        }
+        .div2{
+            padding: 5px;
+            background-color: orange;
+        }
+        .list{
+            width: 200px;
+            height:200px;
+            background-color: red;
+            overflow: auto;
+        }
+        li{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!--Vue中的时间修饰符
+        1.prevent：阻止默认事件(常用)
+        2.stop：阻止事件冒泡
+        3.once：事件只触发一次
+        4.capture：使用事件的捕获模式
+        5.self：只有event.target是当前操作的元素时才触发事件
+        6.passive：事件的默认行为立即执行，无需等待事件回调执行完毕
+    -->
+
+    <div id="demo">
+        <h1>欢迎来到{{name}}</h1>
+        <!--1.prevent：阻止默认事件(常用)-->
+        <a href="https://cn.bing.com/?mkt=zh-CN" @click.prevent="showInfo1($event)">点击进入官网</a>
+        <!--2.stop：阻止事件冒泡-->
+        <div class='demo1' @click="showInfo1">
+            <button @click.stop="showInfo1">点我提示信息</button>
+        </div>
+        <!--3.once：事件只触发一次-->
+        <button @click.once="showInfo1">点我提示信息</button>
+        <!--4.capture：使用事件的捕获模式-->
+        <div class="div1" @click.capture="showMsg(1)">
+            div1
+            <div class="div2" @click="showMsg(2)">
+                div2
+            </div>
+        </div>
+
+        <!--只有event.target是当前操作的元素时才触发事件-->
+        <div class='demo1' @click.self="showInfo1">
+            <button @click.self="showInfo1">点我提示信息</button>
+        </div>
+
+        <!--事件的默认行为立即执行，无需等待事件回调执行完毕-->
+        <!--scroll是滚动条滚动，passive没有影响-->
+        <!--wheel是鼠标滑轮滚动，passive有影响-->
+        <ul @wheel.passive="demo" class="list">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+
+
+    </div>
+
+    <script type="text/javascript">
+        Vue.config.productionTip = false
+
+        new Vue({
+            el:'#demo',
+            data:{
+                name:'EVE的世界'
+            },
+            methods:{
+                showInfo1(e){
+                    // 阻止默认事件，vue中可以不用在这里加
+                    //e.preventDefault()
+                    alert('这里不花钱的...')
+                },
+                showMsg(num){
+                    console.log(num)
+                },
+                demo(){
+                    for (let i = 0; i < 100000; i++) {
+                        console.log('#')
+                    }
+                    console.log('回调函数结束...')
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>
