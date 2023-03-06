@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1.姓名案例_插值语法实现 methods实现</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    姓 <input v-model="firstName"><br/>
+    名 <input v-model="lastName"><br/>
+    <!--插值实现-->
+    姓名 <span>{{firstName}}-{{lastName}}</span>
+    <!--methods实现-->
+    姓名 <span>{{fullName()}}</span>
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    new Vue({
+        el: '#root',
+        data: {
+            firstName: '张',
+            lastName: '三'
+        },
+        methods: {
+            fullName() {
+                console.log('@--------')
+                return this.firstName + '-' + this.lastName
+            }
+        }
+    })
+</script>
+</body>
+</html>
