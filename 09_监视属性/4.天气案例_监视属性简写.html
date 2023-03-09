@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>4.天气案例_监视属性简写</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <h3>今天天气{{info}}</h3>
+    <button @click="changeWeather">切换天气</button>
+</div>
+
+<script type="text/javascript">
+    Vue.config.productionTip = false
+
+    const vm = new Vue({
+        el: '#root',
+        data: {
+            isHot: true
+        },
+        methods: {
+            changeWeather() {
+                this.isHot = !this.isHot
+            }
+        },
+        computed: {
+            info() {
+                return this.isHot === true ? '炎热' : '凉爽'
+            }
+        },
+        watch: {
+            // 正常的写法
+            // isHot: {
+            //     immediate: true,
+            //     deep: true,
+            //     handler(newVlue, oldValue) {
+            //         console.log(newVlue, oldValue)
+            //     }
+            // },
+            // 简写，没有配置项才能简写
+            // isHot(newVlue, oldValue){
+            //     console.log(newVlue, oldValue)
+            // }
+        }
+    })
+    // 正常写法
+    // vm.$watch('isHot', {
+    //     immediate: true,
+    //     deep: true,
+    //     handler(newVlue, oldValue) {
+    //         console.log(newVlue, oldValue)
+    //     }
+    // })
+    // 简写，没有immediate的配置项
+    vm.$watch('isHot',function(newVlue, oldValue){
+        console.log(newVlue, oldValue)
+    })
+
+</script>
+
+</body>
+</html>
